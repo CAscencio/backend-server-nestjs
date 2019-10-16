@@ -6,7 +6,7 @@ export class Persona{
 CODPER: number;
 
 @Column()
-NOMPER: string
+NOMPER: string;
 
 @Column()
 APEPER: string;
