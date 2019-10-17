@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PersonaModule } from './persona/persona.module';
+import { LibroModule } from './libro/libro.module';
 import { TypeOrmModule }  from '@nestjs/typeorm';
 @Module({
   imports: [TypeOrmModule.forRoot(
@@ -14,7 +15,7 @@ import { TypeOrmModule }  from '@nestjs/typeorm';
       "logging": true,
       "entities": [__dirname + '/**/**.entity{.ts,.js}']
     }
-  ), PersonaModule],
+  ), PersonaModule, LibroModule],
   controllers: [AppController],
   providers: [AppService],
 })
