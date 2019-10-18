@@ -5,14 +5,12 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class PersonaService {
+  constructor(
+    @InjectRepository(Persona)
+    private readonly PersonaRepository: Repository<Persona>,
+  ) {}
 
-    constructor(
-        @InjectRepository(Persona)
-        private readonly PersonaRepository: Repository<Persona>,
-      ) {
-      }
-
-      async findAll(){
-          return this.PersonaRepository.find();
-      }
+  async findAll() {
+    return this.PersonaRepository.find();
+  }
 }

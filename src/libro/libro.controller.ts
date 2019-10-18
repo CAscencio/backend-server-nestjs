@@ -1,4 +1,14 @@
-import { Controller } from '@nestjs/common';
+import { LibroService } from './libro.service';
+import { Controller, Get } from '@nestjs/common';
 
 @Controller('libro')
-export class LibroController {}
+export class LibroController {
+
+    
+  constructor(private libroService: LibroService) {}
+
+  @Get()
+  findAll() {
+    return this.libroService.findAll();
+  }
+}
