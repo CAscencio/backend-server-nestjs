@@ -8,7 +8,7 @@ export class PersonaService {
   constructor(
     @InjectRepository(Persona)
     private readonly PersonaRepository: Repository<Persona>,
-  ) {}
+  ) { }
 
   async findAll() {
     return this.PersonaRepository.find();
