@@ -3,6 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Libro } from './Model/Libro.entity';
 import { Repository } from 'typeorm';
 
+import { getConnection } from "typeorm";
+
 @Injectable()
 export class LibroService {
   constructor(
@@ -12,5 +14,13 @@ export class LibroService {
 
   async findAll() {
     return this.LibroRepository.find();
+  }
+
+  async librosDatos(){
+    return await getConnection()
+    .createQueryBuilder()
+    .select(["libro.CODLIB","libro.TITLIB","libro.CANTLIB"])
+    .from(Libro, "libro")
+    .getMany()
   }
 }

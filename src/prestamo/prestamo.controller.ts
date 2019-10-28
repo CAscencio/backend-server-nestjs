@@ -10,6 +10,6 @@ export class PrestamoController {
 
     @Get()
     findAll() {
-        return this.prestamoService.personalizado();
+        return this.prestamoService.consultaSinProcesar();
     }
 }

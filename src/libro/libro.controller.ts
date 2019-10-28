@@ -11,4 +11,9 @@ export class LibroController {
   findAll() {
     return this.libroService.findAll();
   }
+
+  @Get('/Libros')
+  librosDisponibles(){
+    return this.libroService.librosDatos();
+  }
 }

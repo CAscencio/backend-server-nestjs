@@ -8,8 +8,13 @@ export class PersonaController {
     constructor(private personaService: PersonaService){
     }
 
-    @Get()
+    @Get('/Todos')
     findAll(){
         return this.personaService.findAll();
+    }
+
+    @Get()
+    lectoresActivos(){
+        return this.personaService.lectoresActivos();
     }
 }
