@@ -4,6 +4,7 @@ import { Prestamo } from './Model/Prestamo.entity';
 import { Repository, Not } from 'typeorm';
 
 import { getConnection } from "typeorm";
+import { UpdateResult, DeleteResult } from  'typeorm';
 
 @Injectable()
 export class PrestamoService {
@@ -12,8 +13,34 @@ export class PrestamoService {
         private readonly PrestamoRepository: Repository<Prestamo>,
     ) { }
 
+    // -----------  METODOS PARA EL CRUD -----------------------
+
+/*     //LISTAR
     async findAll() {
         return this.PrestamoRepository.find({ CANTFAL: Not(0) });
+    } */
+
+    async findAll() {
+        return this.PrestamoRepository.createQueryBuilder('prestamo')
+        .innerJoinAndSelect('prestamo.CODBIBL', 'CODBIBL')
+        .innerJoinAndSelect('prestamo.CODLECT','CODLECT')
+        .innerJoinAndSelect('prestamo.CODLIB','CODLIB')
+        .getMany();
+    }
+
+    //CREAR
+    async  create(prestamo: Prestamo): Promise<Prestamo> {
+        return await this.PrestamoRepository.save(prestamo);
+    }
+
+    //ACTUALIZAR
+    async update(prestamo: Prestamo): Promise<UpdateResult> {
+        return await this.PrestamoRepository.update(prestamo.CODPRES, prestamo);
+    }
+
+    //ELIMINAR
+    async delete(CODPRES): Promise<DeleteResult> {
+        return await this.PrestamoRepository.delete(CODPRES);
     }
 
     async personalizado() {

@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Prestamo } from "./../../prestamo/Model/Prestamo.entity";
 
 @Entity('PERSONA')
 export class Persona{
@@ -31,5 +32,11 @@ PASSPER: string;
 
 @Column()
 CODUBI: number;
+
+@OneToMany(type => Prestamo, prestamo => prestamo.CODBIBL)
+bibliotecario: Prestamo;
+
+@OneToMany(type => Prestamo, prestamo => prestamo.CODLECT)
+lector: Prestamo;
 
 }

@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Prestamo } from './../../prestamo/Model/Prestamo.entity';
 
 @Entity('LIBRO')
 export class Libro {
@@ -37,4 +38,7 @@ export class Libro {
 
   @Column()
   DIRUBILIB: string;
+
+  @OneToMany(type => Prestamo, prestamo => prestamo.CODLIB)
+  libro: Prestamo;
 }
