@@ -24,4 +24,14 @@ export class PersonaService {
     .where("persona.TIPPER = :TIPPER", { TIPPER: 'L'})
     .getMany();
   }
+
+ async login(USUPER, PASSPER) {
+    return await getConnection()
+    .createQueryBuilder()
+    .select (["login.CODPER","login.NOMPER","login.APEPER"])
+    .from(Persona, "login")
+    .where("login.USUPER = :USUPER",{USUPER})
+    .andWhere("login.PASSPER = :PASSPER",{PASSPER})
+    .getOne();
+  }
 }
