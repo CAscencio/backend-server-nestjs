@@ -24,7 +24,7 @@ export class PersonaService {
     .where("persona.TIPPER = :TIPPER", { TIPPER: 'L'})
     .getMany();
   }
-
+// SERVICIO DE AUTENTICAR EL USUARIO Y CONSTRASENA EN EL LOGIN
  async login(USUPER, PASSPER) {
     return await getConnection()
     .createQueryBuilder()

@@ -16,6 +16,7 @@ export class PersonaController {
     lectoresActivos() {
         return this.personaService.lectoresActivos();
     }
+    // GET DEL SERVICIO DE AUTENTICAR EL USU Y PASS DEL LOGIN
     @Get('/:USUPER/:PASSPER')
     usuario(@Param() params) {
         return this.personaService.login(params.USUPER, params.PASSPER);
