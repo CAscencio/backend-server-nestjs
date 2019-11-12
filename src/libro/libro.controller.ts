@@ -1,5 +1,6 @@
 import { LibroService } from './libro.service';
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Put, Param, Body } from '@nestjs/common';
+import { Libro } from './Model/Libro.entity';
 
 @Controller('libro')
 export class LibroController {
@@ -16,4 +17,10 @@ export class LibroController {
   librosDisponibles(){
     return this.libroService.librosDatos();
   }
+  
+  @Put(':CODLIB/update')
+    async actualizarLibro(@Param('CODLIB') CODLIB, @Body() libroData: Libro): Promise<any> {
+      libroData.CODLIB = Number(CODLIB);
+        return this.libroService.update(libroData);
+    } 
 }

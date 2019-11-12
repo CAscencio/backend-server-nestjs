@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Libro } from './Model/Libro.entity';
-import { Repository } from 'typeorm';
+import { Repository, UpdateResult } from 'typeorm';
 
 import { getConnection } from "typeorm";
 
@@ -23,4 +23,9 @@ export class LibroService {
     .from(Libro, "libro")
     .getMany()
   }
+
+  //ACTUALIZAR
+  async update(libro: Libro): Promise<UpdateResult> {
+    return await this.LibroRepository.update(libro.CODLIB, libro);
+}
 }
