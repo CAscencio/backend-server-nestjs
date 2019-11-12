@@ -1,11 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
+import { Entity, Column, ManyToOne, JoinColumn, PrimaryColumn } from "typeorm";
 import { Prestamo } from "./../../prestamo/Model/Prestamo.entity";
 
 
 @Entity('PRESTAMO_DETALLE')
 export class Devolucion{
 
-    @PrimaryGeneratedColumn()
+    @PrimaryColumn()
     CODDET?: number;
 
     @ManyToOne(type => Prestamo)

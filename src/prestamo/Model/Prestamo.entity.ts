@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToMany } from "typeorm";
+import { Entity, Column, ManyToOne, JoinColumn, OneToMany, PrimaryColumn } from "typeorm";
 import { Persona } from "./../../persona/Model/Persona.entity";
 import { Libro } from "./../../libro/Model/Libro.entity";
 import { Devolucion } from "./../../devolucion/Model/devolucion.entity";
@@ -6,17 +6,12 @@ import { Devolucion } from "./../../devolucion/Model/devolucion.entity";
 @Entity('PRESTAMO')
 export class Prestamo {
 
-    @PrimaryGeneratedColumn()
+    @PrimaryColumn()
     CODPRES?: number;
 
-    /*  @Column()
-     CODBIBL: number; */
     @ManyToOne(type => Persona)
     @JoinColumn({ name: 'CODBIBL' })
     CODBIBL: Persona;
-
-    /*  @Column()
-     CODLECT: number; */
 
     @ManyToOne(type => Persona)
     @JoinColumn({ name: 'CODLECT' })
@@ -30,9 +25,6 @@ export class Prestamo {
 
     @Column()
     CANTFAL: number;
-
-    /* @Column()
-    CODLIB: number; */
 
     @ManyToOne(type => Libro)
     @JoinColumn({ name: 'CODLIB' })

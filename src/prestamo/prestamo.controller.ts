@@ -22,7 +22,6 @@ export class PrestamoController {
     @Put(':CODPRES/update')
     async actualizarPrestamo(@Param('CODPRES') CODPRES, @Body() prestamoData: Prestamo): Promise<any> {
         prestamoData.CODPRES = Number(CODPRES);
-        console.log('Update #' + prestamoData.CODPRES)
         return this.prestamoService.update(prestamoData);
     }  
 

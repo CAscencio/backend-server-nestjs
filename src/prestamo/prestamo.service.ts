@@ -3,59 +3,65 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Prestamo } from './Model/Prestamo.entity';
 import { Repository, Not } from 'typeorm';
 
-import { getConnection } from "typeorm";
-import { UpdateResult, DeleteResult } from  'typeorm';
+import { getConnection } from 'typeorm';
+import { UpdateResult, DeleteResult } from 'typeorm';
 
 @Injectable()
 export class PrestamoService {
-    constructor(
-        @InjectRepository(Prestamo)
-        private readonly PrestamoRepository: Repository<Prestamo>,
-    ) { }
+  constructor(
+    @InjectRepository(Prestamo)
+    private readonly PrestamoRepository: Repository<Prestamo>,
+  ) {}
 
-    // -----------  METODOS PARA EL CRUD -----------------------
+  // -----------  METODOS PARA EL CRUD -----------------------
 
-/*     //LISTAR
+  /*     //LISTAR
     async findAll() {
         return this.PrestamoRepository.find({ CANTFAL: Not(0) });
     } */
 
-    async findAll() {
-        return this.PrestamoRepository.createQueryBuilder('prestamo')
-        .innerJoinAndSelect('prestamo.CODBIBL', 'CODBIBL')
-        .innerJoinAndSelect('prestamo.CODLECT','CODLECT')
-        .innerJoinAndSelect('prestamo.CODLIB','CODLIB')
-        .getMany();
-    }
+  async findAll() {
+    return this.PrestamoRepository.createQueryBuilder('prestamo')
+      .innerJoinAndSelect('prestamo.CODBIBL', 'CODBIBL')
+      .innerJoinAndSelect('prestamo.CODLECT', 'CODLECT')
+      .innerJoinAndSelect('prestamo.CODLIB', 'CODLIB')
+      .getMany();
+  }
 
-    //CREAR
-    async  create(prestamo: Prestamo): Promise<Prestamo> {
-        return await this.PrestamoRepository.save(prestamo);
-    }
+  //CREAR
+  async create(prestamo: Prestamo): Promise<Prestamo> {
+    return await this.PrestamoRepository.save(prestamo);
+  }
 
-    //ACTUALIZAR
-    async update(prestamo: Prestamo): Promise<UpdateResult> {
-        return await this.PrestamoRepository.update(prestamo.CODPRES, prestamo);
-    }
+  //ACTUALIZAR
+  async update(prestamo: Prestamo): Promise<UpdateResult> {
+    return await this.PrestamoRepository.update(prestamo.CODPRES, prestamo);
+  }
 
-    //ELIMINAR
-    async delete(CODPRES): Promise<DeleteResult> {
-        return await this.PrestamoRepository.delete(CODPRES);
-    }
+  //ELIMINAR
+  async delete(CODPRES): Promise<DeleteResult> {
+    return await this.PrestamoRepository.delete(CODPRES);
+  }
 
-    async personalizado() {
-        return await getConnection()
-            .createQueryBuilder()
-            .select("prestamo")
-            .from(Prestamo, "prestamo")
-            .where("prestamo.CODBIBL = :CODBIBL", { CODBIBL: 2 })
-            .printSql()
-            .getMany();
-    }
+  //PROCEDURE DEVOLUCIÓN
+//   async procedure(email: string){
+//     return await this.usuariosRepository.query(
+//       "sp_prueba @email='" + email + "'",
+//     );
+//   }
 
-    async consultaSinProcesar() {
-        return await getConnection()
-            .query(`SELECT
+  async personalizado() {
+    return await getConnection()
+      .createQueryBuilder()
+      .select('prestamo')
+      .from(Prestamo, 'prestamo')
+      .where('prestamo.CODBIBL = :CODBIBL', { CODBIBL: 2 })
+      .printSql()
+      .getMany();
+  }
+
+  async consultaSinProcesar() {
+    return await getConnection().query(`SELECT
         CODPRES,
         CONCAT(PERSONA.NOMPER,CONCAT(' ',PERSONA.APEPER)) AS CODBIBL,
         CONCAT(LECTOR.NOMPER,CONCAT(' ',LECTOR.APEPER)) AS  CODLECT,
@@ -72,6 +78,5 @@ export class PrestamoService {
             ON LIBRO.CODLIB = PRESTAMO.CODLIB
         WHERE CANTFAL != 0
         ORDER BY FSALPRES DESC`);
-    }
-
+  }
 }

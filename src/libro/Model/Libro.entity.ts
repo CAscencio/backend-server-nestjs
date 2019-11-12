@@ -1,9 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Entity, Column, OneToMany, PrimaryColumn } from 'typeorm';
 import { Prestamo } from './../../prestamo/Model/Prestamo.entity';
 
 @Entity('LIBRO')
 export class Libro {
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn()
   CODLIB: number;
 
   @Column()
