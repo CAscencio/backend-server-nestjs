@@ -16,7 +16,7 @@ export class Devolucion{
     CANTDET: number;
 
     @Column()
-    FECHENT?: string;
+    FECHENT?: Date;
 
     @Column("char", { length: 1 })
     TIPDET: string;

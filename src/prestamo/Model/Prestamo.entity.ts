@@ -18,10 +18,10 @@ export class Prestamo {
     CODLECT: Persona;
 
     @Column()
-    FSALPRES?: string;
+    FSALPRES?: Date;
 
     @Column()
-    FENTPRES?: string;
+    FENTPRES?: Date;
 
     @Column()
     CANTFAL: number;
