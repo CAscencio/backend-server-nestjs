@@ -16,6 +16,7 @@ export class DevolucionController {
     return this.devolucionService.create(devolucionData);
   }
 
+  //GET QUE VA AEJECUATR EL PROCEDURE
   @Get('/:CLIBRO/:CANTIDAD/:CPRESTAMO')
   pDevolver(@Param() params) {
     return this.devolucionService.procedureDevolver(
