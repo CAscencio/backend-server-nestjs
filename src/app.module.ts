@@ -10,9 +10,9 @@ import { TypeOrmModule }  from '@nestjs/typeorm';
   imports: [TypeOrmModule.forRoot(
     {
       "type": "oracle",
-      "username": "dbBookFlix",
-      "password": "BookFlix-2019",
-      "connectString": "(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=35.184.25.222)(PORT=1521))(CONNECT_DATA=(SID=XE)))",
+      "username": "db_BOOKFLIX",
+      "password": "db_BOOKFLIX-2019",
+      "connectString": "(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=34.69.77.101)(PORT=1521))(CONNECT_DATA=(SID=XE)))",
       "synchronize": false,
       "logging": true,
       "entities": [__dirname + '/**/**.entity{.ts,.js}']
